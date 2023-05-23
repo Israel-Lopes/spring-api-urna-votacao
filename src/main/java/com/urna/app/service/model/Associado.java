@@ -6,11 +6,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import java.time.LocalDate;
+import java.util.List;
+
 @Data
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Pauta {
-
+public class Associado {
+    private Long Id;
+    private  Boolean voto;
+    private String cpf;
 }

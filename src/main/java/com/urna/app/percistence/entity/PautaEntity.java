@@ -13,9 +13,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "pauta")
-public class SessaoEntity {
-    @javax.persistence.Id
+public class PautaEntity {
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long Id;
+    @Column(name = "titulo", nullable = false)
+    private String titulo;
 }

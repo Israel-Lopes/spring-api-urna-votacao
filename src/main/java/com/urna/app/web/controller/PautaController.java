@@ -10,15 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/login")
+@RequestMapping("/pauta")
 @RestController
 public class PautaController {
-    public static final Logger log = LoggerFactory.getLogger(SessaoService.class);
-    @Autowired(required=true)
-    private PautaService service;
-    @PostMapping
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity login(@RequestBody Pauta model) throws Exception {
-        return service.loginUser(model);
-    }
 }
