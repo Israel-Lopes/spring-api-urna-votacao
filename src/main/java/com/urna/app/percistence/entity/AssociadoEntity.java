@@ -17,9 +17,7 @@ public class AssociadoEntity {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long Id;
-    @Column(name = "voto", nullable = false)
-    private  Boolean voto;
+    private Long id;
     @Column(name = "cpf", nullable = false)
     private String cpf;
 }
