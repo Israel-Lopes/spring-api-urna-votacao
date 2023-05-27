@@ -5,7 +5,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalTime;
-import java.util.List;
 
 @Entity
 @Data
@@ -27,12 +26,7 @@ public class SessaoEntity {
     @Column(name = "votacao_em_andamento")
     private Boolean votacaoEmAndamento;
 
-    @ManyToMany
-    @JoinTable(
-            name = "sessao_votos",
-            joinColumns = @JoinColumn(name = "sessao_id"),
-            inverseJoinColumns = @JoinColumn(name = "voto_id")
-    )
-    @OrderColumn(name = "voto_order")
-    private List<VotoEntity> votos;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "formulario_id")
+    private FormularioDeVotoEntity formulario;
 }
