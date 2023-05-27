@@ -24,6 +24,9 @@ public class SessaoEntity {
     @Column(name = "tempo_da_votacao", columnDefinition = "TIME DEFAULT '00:01:00'")
     private LocalTime tempoDaVotacao;
 
+    @Column(name = "votacao_em_andamento")
+    private Boolean votacaoEmAndamento;
+
     @ManyToMany
     @JoinTable(
             name = "sessao_votos",
