@@ -19,6 +19,5 @@ import java.util.List;
 @NoArgsConstructor
 public class Associado {
     private Long Id;
-    private  Boolean voto;
     private String cpf;
 }

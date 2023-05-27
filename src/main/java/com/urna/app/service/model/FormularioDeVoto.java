@@ -6,12 +6,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Pauta {
-    private Long Id;
-    private String titulo;
+public class FormularioDeVoto {
+    private Long id;
+    private List<Boolean> votos;
+    private List<Long> idAssociadosQueVotaram;
 }
