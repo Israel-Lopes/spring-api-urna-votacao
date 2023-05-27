@@ -34,4 +34,4 @@ build/
 .vscode/
 
 ### nodeJs ###
-/node-api-valida-cpf/node_modules
+/!**/node_modules
