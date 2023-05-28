@@ -28,7 +28,6 @@ public class IAssociadoService implements AssociadoInterface {
     public ResponseEntity updateAssociado(Associado model) {
         return null;
     }
-
     @Override
     public ResponseEntity deleteAssociado(Long id) {
         return null;
