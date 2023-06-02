@@ -20,12 +20,12 @@ import java.util.Optional;
 public class IAssociadoService implements AssociadoInterface {
 
     @Autowired(required = true)
-    AssociadoRepository associadoRepository;
+    AssociadoRepository repository;
 
     @Override
     public ResponseEntity getAssociado(HttpServletRequest request, Long id) {
         try {
-            Optional<AssociadoEntity> entity = associadoRepository.findById(id);
+            Optional<AssociadoEntity> entity = repository.findById(id);
             return entity.isPresent()
                     ? ResponseEntity.ok().header("Content-Type", "application/json")
                         .body(AssociadoMapper.unmarshall(entity.get()))
@@ -37,9 +37,8 @@ public class IAssociadoService implements AssociadoInterface {
     @Override
     public ResponseEntity<List<Associado>> getAssociadoList(HttpServletRequest request) {
         try {
-            List<AssociadoEntity> entities = associadoRepository.findAll();
+            List<AssociadoEntity> entities = repository.findAll();
             List<Associado> associados = new ArrayList<>(AssociadoMapper.unmarshall(entities.stream().toList()));
-
             return associados != null
                     ? ResponseEntity.ok().header("Content-Type", "application/json").body(associados)
                     : ResponseEntity.notFound().build();
@@ -51,7 +50,7 @@ public class IAssociadoService implements AssociadoInterface {
     @Override
     public ResponseEntity createAssociado(@RequestBody Associado model) {
         try {
-            AssociadoEntity entity = associadoRepository.save(AssociadoMapper.marshall(model));
+            AssociadoEntity entity = repository.save(AssociadoMapper.marshall(model));
             return entity != null
                     ? ResponseEntity.ok().header("Content-Type", "application/json")
                         .body(AssociadoMapper.unmarshall(entity))
@@ -63,12 +62,11 @@ public class IAssociadoService implements AssociadoInterface {
     @Override
     public ResponseEntity updateAssociado(Associado model) {
         try {
-            Optional<AssociadoEntity> optionalEntity = associadoRepository.findById(model.getId());
-
+            Optional<AssociadoEntity> optionalEntity = repository.findById(model.getId());
             if (optionalEntity.isPresent()) {
                 AssociadoEntity entity = optionalEntity.get();
                 entity.setCpf(model.getCpf());
-                associadoRepository.save(entity);
+                repository.save(entity);
                 return ResponseEntity.ok()
                         .header("Content-Type", "application/json")
                         .body(AssociadoMapper.unmarshall(entity));
@@ -83,8 +81,8 @@ public class IAssociadoService implements AssociadoInterface {
     @Override
     public ResponseEntity deleteAssociado(Long id) {
         try {
-            return associadoRepository.findById(id).map(record -> {
-                associadoRepository.deleteById(id);
+            return repository.findById(id).map(record -> {
+                repository.deleteById(id);
                 return ResponseEntity.ok().header("Content-Type", "application/json").body(id);
             }).orElse(ResponseEntity.notFound().build());
         } catch (Exception e) {

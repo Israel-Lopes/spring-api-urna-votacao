@@ -1,38 +1,94 @@
 package com.urna.app.service;
 
+import com.urna.app.percistence.entity.AssociadoEntity;
+import com.urna.app.percistence.entity.PautaEntity;
+import com.urna.app.repository.PautaRepository;
 import com.urna.app.service.interfaces.PautaInterface;
 import com.urna.app.service.model.Pauta;
+import com.urna.app.web.mapper.AssociadoMapper;
+import com.urna.app.web.mapper.PautaMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class IPautaService implements PautaInterface {
 
+    @Autowired(required = true)
+    PautaRepository repository;
     @Override
     public ResponseEntity getPauta(HttpServletRequest request, Long id) {
-        return null;
+        try {
+            Optional<PautaEntity> entity = repository.findById(id);
+            return entity.isPresent()
+                    ? ResponseEntity.ok().header("Content-Type", "application/json")
+                        .body(PautaMapper.unmarshall(entity.get()))
+                    : ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @Override
     public ResponseEntity<List<Pauta>> getPautaList(HttpServletRequest request) {
-        return null;
+        try {
+            List<PautaEntity> entities = repository.findAll();
+            List<Pauta> pautas = new ArrayList<>(PautaMapper.unmarshall(entities.stream().toList()));
+            return pautas != null
+                    ? ResponseEntity.ok().header("Content-Type", "application/json").body(pautas)
+                    : ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @Override
     public ResponseEntity createPauta(Pauta model) {
-        return null;
+        try {
+            PautaEntity entity = repository.save(PautaMapper.marshall(model));
+            return entity != null
+                    ? ResponseEntity.ok().header("Content-Type", "application/json")
+                        .body(PautaMapper.unmarshall(entity))
+                    : ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @Override
     public ResponseEntity updatePauta(Pauta model) {
-        return null;
+        try {
+            Optional<PautaEntity> optionalEntity = repository.findById(model.getId());
+            if (optionalEntity.isPresent()) {
+                PautaEntity entity = optionalEntity.get();
+                entity.setTitulo(model.getTitulo());
+                repository.save(entity);
+                return ResponseEntity.ok()
+                        .header("Content-Type", "application/json")
+                        .body(PautaMapper.unmarshall(entity));
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @Override
     public ResponseEntity deletePauta(Long id) {
-        return null;
+        try {
+            return repository.findById(id).map(record -> {
+                repository.deleteById(id);
+                return ResponseEntity.ok().header("Content-Type", "application/json").body(id);
+            }).orElse(ResponseEntity.notFound().build());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }
