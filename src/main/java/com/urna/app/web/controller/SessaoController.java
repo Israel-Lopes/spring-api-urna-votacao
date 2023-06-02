@@ -1,8 +1,6 @@
 package com.urna.app.web.controller;
 
-import com.urna.app.service.IPautaService;
 import com.urna.app.service.ISessaoService;
-import com.urna.app.service.model.Pauta;
 import com.urna.app.service.model.Sessao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-
 
 @RestController
 @RequestMapping("/sessao")
@@ -33,15 +30,5 @@ public class SessaoController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity createSessao(@RequestBody Sessao model) throws Exception {
         return service.createSessao(model);
-    }
-    @PutMapping
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity updateSessao(@RequestBody Sessao model) throws Exception {
-        return service.updateSessao(model);
-    }
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity deleteSessao(@PathVariable Long id) throws Exception {
-        return service.deleteSessao(id);
     }
 }

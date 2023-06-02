@@ -1,11 +1,9 @@
 package com.urna.app.service;
 
-import com.urna.app.percistence.entity.AssociadoEntity;
 import com.urna.app.percistence.entity.PautaEntity;
 import com.urna.app.repository.PautaRepository;
 import com.urna.app.service.interfaces.PautaInterface;
 import com.urna.app.service.model.Pauta;
-import com.urna.app.web.mapper.AssociadoMapper;
 import com.urna.app.web.mapper.PautaMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,7 +32,6 @@ public class IPautaService implements PautaInterface {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
     @Override
     public ResponseEntity<List<Pauta>> getPautaList(HttpServletRequest request) {
         try {
@@ -47,7 +44,6 @@ public class IPautaService implements PautaInterface {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
     @Override
     public ResponseEntity createPauta(Pauta model) {
         try {
@@ -60,7 +56,6 @@ public class IPautaService implements PautaInterface {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
     @Override
     public ResponseEntity updatePauta(Pauta model) {
         try {
@@ -79,7 +74,6 @@ public class IPautaService implements PautaInterface {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
     @Override
     public ResponseEntity deletePauta(Long id) {
         try {

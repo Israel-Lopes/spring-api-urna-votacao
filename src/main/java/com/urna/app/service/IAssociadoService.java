@@ -46,7 +46,6 @@ public class IAssociadoService implements AssociadoInterface {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
     @Override
     public ResponseEntity createAssociado(@RequestBody Associado model) {
         try {
@@ -77,7 +76,6 @@ public class IAssociadoService implements AssociadoInterface {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
     @Override
     public ResponseEntity deleteAssociado(Long id) {
         try {
