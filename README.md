@@ -20,3 +20,12 @@ Agora conceder acessos ao usuario:
 ``
 
 
+## Rotas
+
+``GET`` Criar associado
+```
+curl -X POST -H "Content-Type: application/json" -d '{
+  "cpf": "98765432109"
+}' http://localhost:8080/associado
+```
+
