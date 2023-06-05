@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -37,7 +39,6 @@ public class ISessaoService implements SessaoInterface {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
     @Override
     public ResponseEntity<List<Sessao>> getSessaoList(HttpServletRequest request) {
         try {
@@ -50,15 +51,44 @@ public class ISessaoService implements SessaoInterface {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
     @Override
     public ResponseEntity createSessao(Sessao model) {
         try {
             SessaoEntity entity = repository.save(SessaoMapper.marshall(model));
             return entity != null
                     ? ResponseEntity.ok().header("Content-Type", "application/json")
-                    .body(SessaoMapper.unmarshall(entity))
+                        .body(SessaoMapper.unmarshall(entity))
                     : ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    @Override
+    public ResponseEntity patchAtivaSessao(Long id, Sessao model) {
+        try {
+            Optional<SessaoEntity> optionalEntity = repository.findById(id);
+            SessaoEntity entity = optionalEntity.get();
+
+            if (optionalEntity.isPresent() && entity.getVotacaoEmAndamento()) {
+                entity.setVotacaoEmAndamento(true);
+
+                LocalTime tempoDaVotacao = model.getTempoDaVotacao();
+                LocalDateTime dataHoraAtual = LocalDateTime.now();
+
+                LocalDateTime inicioDaContagem = dataHoraAtual;
+                LocalDateTime fimDaContagem = dataHoraAtual.plusMinutes(tempoDaVotacao.getMinute())
+                        .plusHours(tempoDaVotacao.getHour());
+
+                entity.setInicioDaContagem(inicioDaContagem);
+                entity.setFimDaContagem(fimDaContagem);
+
+                repository.save(entity);
+                return ResponseEntity.ok()
+                        .header("Content-Type", "application/json")
+                        .body(SessaoMapper.unmarshall(entity));
+            } else {
+                return ResponseEntity.notFound().build();
+            }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

@@ -21,6 +21,8 @@ public class SessaoMapper {
                 .id(model.getId())
                 .tempoDaVotacao(model.getTempoDaVotacao())
                 .votacaoEmAndamento(model.getVotacaoEmAndamento())
+                .inicioDaContagem(model.getInicioDaContagem())
+                .fimDaContagem(model.getFimDaContagem())
                 .formulario(model.getFormulario())
                 .build();
     }
@@ -29,6 +31,8 @@ public class SessaoMapper {
                 .id(entity.getId())
                 .tempoDaVotacao(entity.getTempoDaVotacao())
                 .votacaoEmAndamento(entity.getVotacaoEmAndamento())
+                .inicioDaContagem(entity.getInicioDaContagem())
+                .fimDaContagem(entity.getFimDaContagem())
                 .formulario(entity.getFormulario())
                 .build();
     }

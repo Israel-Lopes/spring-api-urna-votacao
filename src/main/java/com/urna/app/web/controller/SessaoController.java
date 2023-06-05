@@ -31,4 +31,9 @@ public class SessaoController {
     public ResponseEntity createSessao(@RequestBody Sessao model) throws Exception {
         return service.createSessao(model);
     }
+    @PatchMapping
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public ResponseEntity patchSessao(Long id, @RequestBody Sessao model) throws Exception {
+        return service.patchAtivaSessao(id, model);
+    }
 }

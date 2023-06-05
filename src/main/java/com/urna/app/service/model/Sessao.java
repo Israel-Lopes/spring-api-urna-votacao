@@ -13,6 +13,7 @@ import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Data
@@ -24,5 +25,7 @@ public class Sessao {
     private Long id;
     private LocalTime tempoDaVotacao;
     private Boolean votacaoEmAndamento;
+    private LocalDateTime inicioDaContagem;
+    private LocalDateTime fimDaContagem;
     private FormularioDeVotoEntity formulario;
 }

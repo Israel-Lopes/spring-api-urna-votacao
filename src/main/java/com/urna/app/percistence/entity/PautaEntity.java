@@ -20,4 +20,6 @@ public class PautaEntity {
     private Long id;
     @Column(name = "titulo", nullable = false)
     private String titulo;
+    @Column(name = "descricao", nullable = false)
+    private String descricao;
 }

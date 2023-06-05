@@ -18,12 +18,14 @@ public class PautaMapper {
         return PautaEntity.builder()
                 .id(model.getId())
                 .titulo(model.getTitulo())
+                .descricao(model.getDescricao())
                 .build();
     }
     public static Pauta unmarshall(PautaEntity entity) {
         return Pauta.builder()
                 .Id(entity.getId())
                 .titulo(entity.getTitulo())
+                .descricao(entity.getDescricao())
                 .build();
     }
 }
