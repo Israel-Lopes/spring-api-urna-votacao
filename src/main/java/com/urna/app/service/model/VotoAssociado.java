@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class VotoAssociado {
-    private Long idAssociado;
     private String cpf;
+    private Boolean voto;
+    private Long idSessao;
 }

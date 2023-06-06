@@ -49,6 +49,8 @@ public class IAssociadoService implements AssociadoInterface {
     @Override
     public ResponseEntity createAssociado(@RequestBody Associado model) {
         try {
+            String cpfFormatado = model.getCpf().replace(" ", "").replace("-", "");
+            model.setCpf(cpfFormatado);
             AssociadoEntity entity = repository.save(AssociadoMapper.marshall(model));
             return entity != null
                     ? ResponseEntity.ok().header("Content-Type", "application/json")

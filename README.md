@@ -77,3 +77,18 @@ curl -X POST -H "Content-Type: application/json" -d '{
 ```shell
 curl -X GET http://localhost:8080/pauta
 ```
+
+---
+
+4. Votacao
+
+``POST`` Cria um voto
+```shell
+curl -X POST -H "Content-Type: application/json" -d '{
+  "cpf": "2222222",
+  "voto": true,
+  "idSessao": 1
+}' http://localhost:8080/votacao
+```
+
+O campo **"voto"**, determina se o associado vota contra ou a favor. true para a favor e false para contra.

@@ -69,7 +69,7 @@ public class ISessaoService implements SessaoInterface {
             Optional<SessaoEntity> optionalEntity = repository.findById(id);
             SessaoEntity entity = optionalEntity.get();
 
-            if (optionalEntity.isPresent() && entity.getVotacaoEmAndamento()) {
+            if (optionalEntity.isPresent() && entity.getVotacaoEmAndamento() == false) {
                 entity.setVotacaoEmAndamento(true);
 
                 LocalTime tempoDaVotacao = model.getTempoDaVotacao();

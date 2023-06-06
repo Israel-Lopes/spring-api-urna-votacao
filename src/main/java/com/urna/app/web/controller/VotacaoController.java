@@ -1,7 +1,7 @@
 package com.urna.app.web.controller;
 
-import com.urna.app.service.ISessaoService;
-import com.urna.app.service.model.Sessao;
+import com.urna.app.service.IVotacaoService;
+import com.urna.app.service.model.VotoAssociado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/votacao")
 public class VotacaoController {
     @Autowired(required=true)
-    private ISessaoService service;
+    private IVotacaoService service;
 
     @PostMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity createVotacao(Long id, @RequestBody Sessao model) throws Exception {
-        return service.createSessao(model);
+    public ResponseEntity createVotacao(String cpf, @RequestBody VotoAssociado model) throws Exception {
+        return service.createVoto(cpf, model);
     }
 }
