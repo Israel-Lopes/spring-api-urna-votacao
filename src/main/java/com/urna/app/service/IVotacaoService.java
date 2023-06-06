@@ -14,13 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.Optional;
 
+@Service
 public class IVotacaoService implements VotacaoInterface {
-    @Value("${validaCPF.cpfValido}")
-    private static String cpfValido;
+    private static final String cpfValido = "ABLE_TO_VOTE";
     @Autowired(required = true)
     AssociadoRepository associadoRepository;
     @Autowired(required = true)
