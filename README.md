@@ -20,6 +20,16 @@ Agora conceder acessos ao usuario:
 ``
 
 
+Segue abaixo a sequencia correta:
+
+1. criar associado
+2. Criar pauta
+3. Criar sessao
+4. iniciar votacao
+5. associado votar
+
+
+
 ## Rotas
 
 1. Associado
