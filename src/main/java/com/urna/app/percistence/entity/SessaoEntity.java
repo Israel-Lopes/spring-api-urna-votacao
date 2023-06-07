@@ -36,4 +36,8 @@ public class SessaoEntity {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "formulario_id")
     private FormularioDeVotoEntity formulario;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "pauta_id")
+    private PautaEntity pauta;
 }

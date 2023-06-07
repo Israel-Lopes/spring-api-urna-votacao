@@ -102,3 +102,90 @@ curl -X POST -H "Content-Type: application/json" -d '{
 ```
 
 O campo **"voto"**, determina se o associado vota contra ou a favor. true para a favor e false para contra.
+
+
+Fluxo completa de criacao ate a votacao:
+
+1. Criando associado
+
+Entrada:
+```shell
+curl -X POST -H "Content-Type: application/json" -d '{
+"cpf": "74525561785"
+}' http://localhost:8080/associado
+```
+
+saida:
+```shell
+{
+  "cpf": "74525561785",
+  "id": 10
+}
+```
+
+2. Criando a sessao de votacao
+
+Entrada:
+```shell
+curl -X POST -H "Content-Type: application/json" -d '{
+  "tempoDaVotacao": "08:00:00",
+  "votacaoEmAndamento": false,
+    "pauta": {
+      "titulo": "Pauta sobre direitos trabalhistas",
+      "descricao": "Referente a demissões"
+    }
+}' http://localhost:8080/sessao
+```
+
+Retorno:
+```shell
+{
+  "id": 8,
+  "tempoDaVotacao": "08:00:00",
+  "votacaoEmAndamento": null,
+  "inicioDaContagem": null,
+  "fimDaContagem": null,
+  "formulario": null,
+  "pauta": {
+    "id": 3,
+    "titulo": "Pauta sobre direitos trabalhistas",
+    "descricao": "Referente a demissões"
+  }
+}
+```
+
+3. Iniciado sessao de votacao
+
+Entrada:
+```shell
+curl -X PATCH -H "Content-Type: application/json" -d '{
+  "votacaoEmAndamento": true
+}' http://localhost:8080/sessao/8
+```
+
+Saida:
+```shell
+{
+  "id": 8,
+  "tempoDaVotacao": "08:00:00",
+  "votacaoEmAndamento": true,
+  "inicioDaContagem": "2023-06-07T13:56:04.335076652",
+  "fimDaContagem": "2023-06-07T21:56:04.335076652",
+  "formulario": null,
+  "pauta": {
+    "id": 3,
+    "titulo": "Pauta sobre direitos trabalhistas",
+    "descricao": "Referente a demissões"
+  }
+}
+```
+
+
+4. Criando voto
+```shell
+curl -X POST -H "Content-Type: application/json" -d '{
+  "cpf": "98765432109",
+  "voto": true,
+  "idSessao": 8
+}' http://localhost:8080/votacao/98765432109
+```

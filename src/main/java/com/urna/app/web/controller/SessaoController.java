@@ -33,7 +33,7 @@ public class SessaoController {
     }
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity patchSessao(Long id, @RequestBody Sessao model) throws Exception {
+    public ResponseEntity patchSessao(@RequestBody Sessao model, @PathVariable Long id) throws Exception {
         return service.patchAtivaSessao(id, model);
     }
 }

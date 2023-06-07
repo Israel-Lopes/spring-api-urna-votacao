@@ -1,8 +1,5 @@
 #!/bin/bash
 
-
-# Deve se ter o faker instalado junt com python e o jq
-
 # Função para exibir uma mensagem de log
 exibir_log() {
   echo "[LOG] $1"
@@ -43,17 +40,17 @@ criar_sessao() {
   response=$(curl -sS -X POST -H "Content-Type: application/json" -d '{
     "tempoDaVotacao": "08:00:00"
   }' http://localhost:8080/sessao)
-  id=$(echo "$response" | jq -r '.id')
-  exibir_log "Sessão de votação criada com ID: $id"
+  sessao_id=$(echo "$response" | jq -r '.id')
+  exibir_log "Sessão de votação criada com ID: $sessao_id"
   echo
 }
 
 # Função para iniciar a votação em uma sessão
 iniciar_votacao() {
   exibir_log "Iniciando votação..."
-  curl -sS -X PATCH -H "Content-Type: application/json" -d '{
+  response=$(curl -sS -X PATCH -H "Content-Type: application/json" -d '{
     "votacaoEmAndamento": true
-  }' "http://localhost:8080/sessao/$1"
+  }' "http://localhost:8080/sessao/$1")
   exibir_log "Votação iniciada na sessão com ID: $1"
   echo
 }
@@ -75,8 +72,6 @@ exibir_log "Iniciando o fluxo..."
 criar_associado
 criar_pauta
 criar_sessao
-sessao_id=$(echo "$response" | jq -r '.id')
 iniciar_votacao "$sessao_id"
 associado_votar "$sessao_id"
 exibir_log "Fluxo concluído com sucesso."
-

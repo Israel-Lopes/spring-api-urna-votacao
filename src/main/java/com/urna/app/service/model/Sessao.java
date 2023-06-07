@@ -2,6 +2,7 @@ package com.urna.app.service.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.urna.app.percistence.entity.FormularioDeVotoEntity;
+import com.urna.app.percistence.entity.PautaEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,4 +29,5 @@ public class Sessao {
     private LocalDateTime inicioDaContagem;
     private LocalDateTime fimDaContagem;
     private FormularioDeVotoEntity formulario;
+    private PautaEntity pauta;
 }

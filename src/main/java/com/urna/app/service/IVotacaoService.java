@@ -31,9 +31,9 @@ public class IVotacaoService implements VotacaoInterface {
     private ValidaCPF validaCPF;
 
     @Override
-    public ResponseEntity createVoto(String cpf, VotoAssociado model) {
+    public ResponseEntity createVoto(Long id, VotoAssociado model) {
         try {
-            String cpfFormatado = cpf.replace(" ", "").replace("-", "");
+            String cpfFormatado = model.getCpf().replace(" ", "").replace("-", "");
             AssociadoEntity entity = associadoRepository.findByCpf(cpfFormatado);
             validaCPF.setStatus(client.getValidaCPF(cpfFormatado));
 

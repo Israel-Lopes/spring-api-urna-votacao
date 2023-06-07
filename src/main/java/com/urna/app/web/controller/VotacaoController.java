@@ -15,7 +15,7 @@ public class VotacaoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity createVotacao(String cpf, @RequestBody VotoAssociado model) throws Exception {
-        return service.createVoto(cpf, model);
+    public ResponseEntity createVotacao(@PathVariable Long id, @RequestBody VotoAssociado model) throws Exception {
+        return service.createVoto(id, model);
     }
 }

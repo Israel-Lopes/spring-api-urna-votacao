@@ -5,5 +5,5 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 
 public interface VotacaoInterface {
-    public ResponseEntity createVoto(String cpf, @RequestBody VotoAssociado model);
+    public ResponseEntity createVoto(Long id, @RequestBody VotoAssociado model);
 }

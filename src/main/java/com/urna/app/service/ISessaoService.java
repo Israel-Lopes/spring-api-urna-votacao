@@ -72,7 +72,7 @@ public class ISessaoService implements SessaoInterface {
             if (optionalEntity.isPresent() && entity.getVotacaoEmAndamento() == false) {
                 entity.setVotacaoEmAndamento(true);
 
-                LocalTime tempoDaVotacao = model.getTempoDaVotacao();
+                LocalTime tempoDaVotacao = entity.getTempoDaVotacao();
                 LocalDateTime dataHoraAtual = LocalDateTime.now();
 
                 LocalDateTime inicioDaContagem = dataHoraAtual;
