@@ -159,7 +159,8 @@ Retorno:
 Entrada:
 ```shell
 curl -X PATCH -H "Content-Type: application/json" -d '{
-  "votacaoEmAndamento": true
+  "votacaoEmAndamento": true,
+  "formulario": {}
 }' http://localhost:8080/sessao/8
 ```
 
@@ -184,8 +185,8 @@ Saida:
 4. Criando voto
 ```shell
 curl -X POST -H "Content-Type: application/json" -d '{
-  "cpf": "98765432109",
+  "cpf": "74525561785",
   "voto": true,
   "idSessao": 8
-}' http://localhost:8080/votacao/98765432109
+}' http://localhost:8080/votacao/8
 ```

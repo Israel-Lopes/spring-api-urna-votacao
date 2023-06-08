@@ -1,5 +1,7 @@
 package com.urna.app.service;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.urna.app.integration.clients.ValidaCPFClient;
 import com.urna.app.integration.model.ValidaCPF;
 import com.urna.app.percistence.entity.AssociadoEntity;
@@ -28,16 +30,20 @@ public class IVotacaoService implements VotacaoInterface {
     SessaoRepository sessaoRepository;
     @Autowired(required=true)
     private ValidaCPFClient client;
-    private ValidaCPF validaCPF;
 
     @Override
     public ResponseEntity createVoto(Long id, VotoAssociado model) {
         try {
             String cpfFormatado = model.getCpf().replace(" ", "").replace("-", "");
             AssociadoEntity entity = associadoRepository.findByCpf(cpfFormatado);
-            validaCPF.setStatus(client.getValidaCPF(cpfFormatado));
 
-            if (validaCPF.getStatus() != cpfValido || entity == null) {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode validaCpfNode = mapper.readTree(client.getValidaCPF(cpfFormatado));
+
+            ValidaCPF validaCPF = new ValidaCPF();
+            validaCPF.setStatus(validaCpfNode.get("status").textValue());
+
+            if (!validaCPF.getStatus().equals(cpfValido) || entity == null) {
                 return ResponseEntity.notFound().build();
             }
 
