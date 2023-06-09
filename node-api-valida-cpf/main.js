@@ -12,6 +12,6 @@ app.get('/cpf/:cpf', (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log('Servidor JSON rodando em http://localhost:3000');
+app.listen(9090, () => {
+  console.log('Servidor JSON rodando em http://localhost:9090');
 });

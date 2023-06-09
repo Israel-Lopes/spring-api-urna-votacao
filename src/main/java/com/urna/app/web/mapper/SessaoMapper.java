@@ -21,7 +21,10 @@ public class SessaoMapper {
                 .id(model.getId())
                 .tempoDaVotacao(model.getTempoDaVotacao())
                 .votacaoEmAndamento(model.getVotacaoEmAndamento())
+                .inicioDaContagem(model.getInicioDaContagem())
+                .fimDaContagem(model.getFimDaContagem())
                 .formulario(model.getFormulario())
+                .pauta(model.getPauta())
                 .build();
     }
     public static Sessao unmarshall(SessaoEntity entity) {
@@ -29,7 +32,10 @@ public class SessaoMapper {
                 .id(entity.getId())
                 .tempoDaVotacao(entity.getTempoDaVotacao())
                 .votacaoEmAndamento(entity.getVotacaoEmAndamento())
+                .inicioDaContagem(entity.getInicioDaContagem())
+                .fimDaContagem(entity.getFimDaContagem())
                 .formulario(entity.getFormulario())
+                .pauta(entity.getPauta())
                 .build();
     }
 }

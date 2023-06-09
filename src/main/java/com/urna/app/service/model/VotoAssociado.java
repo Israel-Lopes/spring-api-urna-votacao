@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Pauta {
-    private Long Id;
-    private String titulo;
-    private String descricao;
+public class VotoAssociado {
+    private String cpf;
+    private Boolean voto;
+    private Long idSessao;
 }
