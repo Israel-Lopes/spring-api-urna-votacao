@@ -1,5 +1,13 @@
 # Aplicação de votação
 
+Para inicar aplicação via docker basta seguir os passos abaixo:
+
+1. Executar build: ``sudo docker build -t nome-da-imagem .``
+2. Iniciar o container: ``sudo docker run -p 8080:8080 -p 9090:9090 <nome-da-imagem>``
+
+
+
+
 Identificador da instância de banco de dados: database-1
 
 nome do usuario: admin
@@ -61,7 +69,11 @@ O campo ``tempoDaVotacao`` possui valor **default** de 1 minuto caso nao seja in
 
 ``GET`` Lista as sessoes de voto
 ```shell
-curl -X GET http://localhost:8080/sessao
+curl -X POST -H "Content-Type: application/json" -d '{
+  "cpf": "74525561785",
+  "voto": true,
+  "idSessao": 8
+}' http://localhost:8080/votacao/8
 ```
 
 ``PATCH`` Inicia sessao de voto
@@ -74,14 +86,6 @@ curl -X PATCH -H "Content-Type: application/json" -d '{
 ---
 
 3. Pauta
-
-``POST`` Criar pauta de votacao
-```shell
-curl -X POST -H "Content-Type: application/json" -d '{
-  "titulo": "Titulo da pauta",
-  "descricao": "descricao da pauta"
-}' http://localhost:8080/pauta
-```
 
 ``GET`` Listar pautas
 ```shell
@@ -129,7 +133,6 @@ Entrada:
 ```shell
 curl -X POST -H "Content-Type: application/json" -d '{
   "tempoDaVotacao": "08:00:00",
-  "votacaoEmAndamento": false,
     "pauta": {
       "titulo": "Pauta sobre direitos trabalhistas",
       "descricao": "Referente a demissões"
@@ -142,7 +145,7 @@ Retorno:
 {
   "id": 8,
   "tempoDaVotacao": "08:00:00",
-  "votacaoEmAndamento": null,
+  "votacaoEmAndamento": false,
   "inicioDaContagem": null,
   "fimDaContagem": null,
   "formulario": null,
@@ -159,8 +162,7 @@ Retorno:
 Entrada:
 ```shell
 curl -X PATCH -H "Content-Type: application/json" -d '{
-  "votacaoEmAndamento": true,
-  "formulario": {}
+  "votacaoEmAndamento": true
 }' http://localhost:8080/sessao/8
 ```
 

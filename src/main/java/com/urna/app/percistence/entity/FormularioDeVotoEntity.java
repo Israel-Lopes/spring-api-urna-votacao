@@ -21,7 +21,7 @@ public class FormularioDeVotoEntity {
     private Long id;
 
     @ElementCollection
-    @Column(name = "voto")
+    @Column(name = "voto", nullable = true, columnDefinition = "BOOLEAN DEFAULT NULL")
     private List<Boolean> votos;
 
     @ElementCollection

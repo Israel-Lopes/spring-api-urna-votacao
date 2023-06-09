@@ -1,13 +1,9 @@
 package com.urna.app.service;
 
-import com.urna.app.percistence.entity.AssociadoEntity;
 import com.urna.app.percistence.entity.SessaoEntity;
-import com.urna.app.repository.AssociadoRepository;
 import com.urna.app.repository.SessaoRepository;
 import com.urna.app.service.interfaces.SessaoInterface;
-import com.urna.app.service.model.Associado;
 import com.urna.app.service.model.Sessao;
-import com.urna.app.web.mapper.AssociadoMapper;
 import com.urna.app.web.mapper.SessaoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -54,6 +50,7 @@ public class ISessaoService implements SessaoInterface {
     @Override
     public ResponseEntity createSessao(Sessao model) {
         try {
+            model.setVotacaoEmAndamento(false);
             SessaoEntity entity = repository.save(SessaoMapper.marshall(model));
             return entity != null
                     ? ResponseEntity.ok().header("Content-Type", "application/json")

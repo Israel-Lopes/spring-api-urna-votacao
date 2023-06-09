@@ -13,12 +13,13 @@ import com.urna.app.service.interfaces.VotacaoInterface;
 import com.urna.app.service.model.VotoAssociado;
 import com.urna.app.web.mapper.SessaoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -64,7 +65,8 @@ public class IVotacaoService implements VotacaoInterface {
             formularioDeVoto.setIdAssociadosQueVotaram(Collections.singletonList(entity.getId()));
             formularioDeVoto.setVotos(Collections.singletonList(model.getVoto()));
 
-            sessaoEntity.setFormulario(formularioDeVoto);
+            sessaoEntity.getFormulario().getVotos().addAll(formularioDeVoto.getVotos());
+            sessaoEntity.getFormulario().getIdAssociadosQueVotaram().addAll(formularioDeVoto.getIdAssociadosQueVotaram());
             sessaoRepository.save(sessaoEntity);
 
             return ResponseEntity.ok().header("Content-Type", "application/json")
