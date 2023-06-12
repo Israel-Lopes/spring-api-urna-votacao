@@ -1,5 +1,8 @@
 # Aplicação de votação
 
+
+![diagrama de classes](documentation/img/diagrama-de-classes.png)
+
 Para inicar aplicação via docker basta seguir os passos abaixo:
 
 1. Executar build: ``sudo docker build -t nome-da-imagem .``
@@ -27,7 +30,6 @@ Agora conceder acessos ao usuario:
 ``GRANT CREATE ON *.* TO 'admin'@'%';
 ``
 
-
 Segue abaixo a sequencia correta:
 
 1. criar associado
@@ -35,8 +37,6 @@ Segue abaixo a sequencia correta:
 3. Criar sessao
 4. iniciar votacao
 5. associado votar
-
-
 
 ## Rotas
 
@@ -182,7 +182,6 @@ Saida:
   }
 }
 ```
-
 
 4. Criando voto
 ```shell
